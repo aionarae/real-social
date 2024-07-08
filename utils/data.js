@@ -23,8 +23,4 @@ const thought = [
   }
 ];
 
-
-
-
-
 module.exports = { user, reaction, thought };

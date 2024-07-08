@@ -1,11 +1,36 @@
-// Purpose: Create the Thought model using the ThoughtSchema
+// Create the Thought model using the ThoughtSchema
 const {Schema, model } = require('mongoose');
-
-// Import the Reaction schema
-const ReactionSchema = require('./Reaction');
-
 // Import the dateFormat utility
 const dateFormat = require('../utils/dateFormat');
+
+// Define the Reaction schema subdocument
+const ReactionSchema = new Schema({
+    reactionId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
+    },
+    reactionBody: {
+        type: String,
+        required: true,
+        maxlength: 280
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (createdAtVal) => dateFormat(createdAtVal)
+    }
+},
+{
+    toJSON: {
+        getters: true
+    }
+});
+
+
 
 // Define the Thought schema
 const ThoughtSchema = new Schema({
