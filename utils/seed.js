@@ -8,7 +8,7 @@ connection.once('open', async () => {
   console.log('connected to the database');
 
   // delete collections if they exist
-  
+
 
 
   await User.deleteMany({});
@@ -21,4 +21,4 @@ connection.once('open', async () => {
 
   console.log('all done!');
   process.exit(0);
-}
+});
