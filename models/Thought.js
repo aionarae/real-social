@@ -1,10 +1,8 @@
-// Create the Thought model using the ThoughtSchema
+// Create the Thought model using the thoughtSchema
 const {Schema, model, Types } = require('mongoose');
-// Import the dateFormat utility
-const dateFormat = require('../utils/dateFormat');
 
 // Define the Reaction schema subdocument
-const ReactionSchema = new Schema({
+const reactionSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
         default: () => new Types.ObjectId()
@@ -31,7 +29,7 @@ const ReactionSchema = new Schema({
 });
 
 // Define the Thought schema
-const ThoughtSchema = new Schema({
+const thoughtSchema = new Schema({
     thoughtText: {
         type: String,
         required: true,
@@ -48,7 +46,7 @@ const ThoughtSchema = new Schema({
         required: true
     },
     // Array of nested documents created with the reactionSchema
-    reactions: [ReactionSchema]
+    reactions: [reactionSchema]
 },
 {
     toJSON: {
@@ -59,12 +57,12 @@ const ThoughtSchema = new Schema({
 );
 
 // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
-ThoughtSchema.virtual('reactionCount').get(function(){
+thoughtSchema.virtual('reactionCount').get(function(){
     return this.reactions.length;
 });
 
-// Create the Thought model using the ThoughtSchema
-const Thought = model('thought', ThoughtSchema);
+// Create the Thought model using the thoughtSchema
+const Thought = model('thought', thoughtSchema);
 
 // Export the Thought model
 module.exports = Thought;

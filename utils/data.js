@@ -1,26 +1,26 @@
 // Purpose: This file contains the data that will be used to seed the database.
-const user = [
+const userData = [
   {
-    username: 'test_user',
-    email: 'test@test.com',
+    username: 'user_1',
+    email: 'user_1@test.com',
     thoughts: [],
     friends: []
   }
 ];
 
-const reaction = [
+const reactionData = [
   {
-    reactionBody: 'test reaction',
-    username: 'test_user'
+    reactionBody: 'This is the reaction body.',
+    username: 'user_1'
   }
 ];
 
-const thought = [
+const thoughtData = [
   {
-    thoughtText: 'test thought',
-    username: 'test_user',
+    thoughtText: 'This is a thought.',
+    username: 'user_1',
     reactions: []
   }
 ];
 
-module.exports = { user, reaction, thought };
+module.exports = { userData, reactionData, thoughtData };

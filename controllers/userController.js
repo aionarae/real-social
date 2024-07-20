@@ -57,7 +57,6 @@ module.exports = {
       .catch(err => res.status(400).json(err));
     },
 
-
   // delete a user
   async deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.id })
