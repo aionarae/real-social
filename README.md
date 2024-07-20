@@ -4,14 +4,9 @@
 
 ![Image alt text](./assets/images/project-screenshot.png)
 
-## Link to deployed application:
-
-https://aionarae.github.io/real-social
-
 ## Description:
 
 This is a Social Media API app that uses a NoSQL database for a social media startup.
-
 
 ## Table of Contents (Optional):
 
