@@ -1,5 +1,5 @@
 // Create the Thought model using the ThoughtSchema
-const {Schema, model } = require('mongoose');
+const {Schema, model, Types } = require('mongoose');
 // Import the dateFormat utility
 const dateFormat = require('../utils/dateFormat');
 
@@ -30,8 +30,6 @@ const ReactionSchema = new Schema({
     }
 });
 
-
-
 // Define the Thought schema
 const ThoughtSchema = new Schema({
     thoughtText: {
@@ -61,7 +59,7 @@ const ThoughtSchema = new Schema({
 );
 
 // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
-ThoughtSchema.virtual('reactionCount').get(function() {
+ThoughtSchema.virtual('reactionCount').get(function(){
     return this.reactions.length;
 });
 
