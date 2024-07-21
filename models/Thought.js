@@ -1,68 +1,80 @@
 // Create the Thought model using the thoughtSchema
 const {Schema, model, Types } = require('mongoose');
+// Import date-format
+const dateFormat = require('date-format');
 
-// Define the Reaction schema subdocument
-const reactionSchema = new Schema({
-    reactionId: {
-        type: Schema.Types.ObjectId,
-        default: () => new Types.ObjectId()
+// Define the Reaction subdocument for the reactions array in the Thought schema
+const reactionSchema = new Schema(
+    {
+        reactionId: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId()
+        },
+        reactionBody: {
+            type: String,
+            required: true,
+            maxlength: 280
+        },
+        username: {
+            type: { 
+                type: Schema.Types.ObjectId, 
+                ref: 'User' 
+            }
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: (createdAtVal) => dateFormat('MM/dd/yyyy hh:mm:ss', new Date(createdAtVal))
+        }
     },
-    reactionBody: {
-        type: String,
-        required: true,
-        maxlength: 280
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-        get: (createdAtVal) => dateFormat(createdAtVal)
+    {
+        toJSON: {
+            getters: true
+        }
     }
-},
-{
-    toJSON: {
-        getters: true
-    }
-});
+);
 
 // Define the Thought schema
-const thoughtSchema = new Schema({
-    thoughtText: {
-        type: String,
-        required: true,
-        minlength: 1,
-        maxlength: 280
+const thoughtSchema = new Schema(
+    {
+        thoughtText: {
+            type: String,
+            required: true,
+            minlength: 1,
+            maxlength: 280
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: (createdAtVal) => dateFormat('MM/dd/yyyy hh:mm:ss', new Date(createdAtVal))
+        },
+        username: {
+            type: { 
+                type: Schema.Types.ObjectId, 
+                ref: 'User' 
+            }
+        },
+        reactions: [reactionSchema]
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-        get: (createdAtVal) => dateFormat(createdAtVal)
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    // Array of nested documents created with the reactionSchema
-    reactions: [reactionSchema]
-},
-{
-    toJSON: {
-        virtuals: true,
-        getters: true
-    }, 
-}
+    {
+        toJSON: {
+            virtuals: true,
+            getters: true
+        },
+        id: false
+    }
 );
 
 // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
-thoughtSchema.virtual('reactionCount').get(function(){
+thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 });
 
 // Create the Thought model using the thoughtSchema
-const Thought = model('thought', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
+
+// Create the Reaction model using the reactionSchema
+const Reaction = model('Reaction', reactionSchema);
 
 // Export the Thought model
-module.exports = Thought;
+module.exports = { Thought, Reaction };
