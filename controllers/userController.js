@@ -1,5 +1,6 @@
 // Purpose: to create the user controller for the user model
 const { ObjectId } = require('mongoose');
+
 const { User, Thought } = require('../models');
 
 module.exports = {
@@ -9,7 +10,6 @@ module.exports = {
       .populate({ path: 'thoughts', select: '-__v' })
       .populate({ path: 'friends', select: '-__v' })
       .select('-__v')
-      .sort({ _id: -1 })
       .then(dbUserData => res.json(dbUserData))
       .catch(err => {
         console.log(err.message);
@@ -19,7 +19,7 @@ module.exports = {
 
   // get one user by id
   async getUserById({ params }, res ) {
-    User.findOne({ _id: params.id })
+    User.findById({ _id: params.id })
       .populate({ path: 'thoughts', select: '-__v' })
       .populate({ path: 'friends', select: '-__v' })
       .select('-__v')

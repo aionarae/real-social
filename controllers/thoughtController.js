@@ -1,12 +1,12 @@
-const { Types } = require('mongodb');
-const { User, Thought } = require('../models');
+const { ObjectId } = require('mongoose').Types;
+const { Thought, User } = require('../models');
 
 module.exports = {
+
     // get all thoughts
     async getAllThoughts(req, res) {
         try {
-            const thoughts = Thought.find({});
-            res.json(thoughts);
+            const thoughts = Thought.find({})
         }
         catch (err) {
             console.log(err);
@@ -16,7 +16,7 @@ module.exports = {
     // get one thought by id, use findById instead of findOne
     async getThoughtById({ params }, res) {
         try {
-            const thought = Thought.findById(ObjectId(params.id));
+            const thought = Thought.findbyId(params.id);
             res.json(thought);
         }
         catch (err) {

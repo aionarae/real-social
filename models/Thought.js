@@ -1,5 +1,6 @@
 // Create the Thought model using the thoughtSchema
 const {Schema, model, Types } = require('mongoose');
+
 // Import date-format
 const dateFormat = require('date-format');
 
@@ -74,7 +75,7 @@ thoughtSchema.virtual('reactionCount').get(function() {
 const Thought = model('Thought', thoughtSchema);
 
 // Create the Reaction model using the reactionSchema
-const Reaction = model('Reaction', reactionSchema);
+//const //Reaction = model('Reaction', reactionSchema);
 
 // Export the Thought model
-module.exports = { Thought, Reaction };
+module.exports = { Thought };

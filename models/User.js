@@ -1,5 +1,5 @@
 // Dependencies
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 // Define the User schema
 const userSchema = new Schema(
