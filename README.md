@@ -1,5 +1,5 @@
-# E-Commerce Site
-  
+# Real Social
+
 ## Screenshot:
 
 ![Image alt text](./assets/images/project-screenshot.png)
